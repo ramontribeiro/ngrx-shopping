@@ -1,0 +1,17 @@
+<!-- <div class="col-12 mb-3"  style="display: flex; justify-content: flex-end;">
+  <button type="submit" class="btn btn-primary" routerLinkActive="active" routerLink="/list">voltar</button>
+</div> -->
+<div class="col-12">
+  <form [formGroup]="itemForm" (submit)="saveEdit()" class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-5">
+        <input type="text" class="form-control" id="name" placeholder="Ingredient" formControlName="name">
+    </div>
+    <div class="col-5">
+        <input type="text" size="4" class="form-control" id="quantity" placeholder="Quantity" formControlName="quantity">
+    </div>
+
+    <div class="col-2">
+      <button type="submit" class="btn btn-success" style="width: 100%;">Gravar</button>
+    </div>
+  </form>
+</div>
