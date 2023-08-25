@@ -1,0 +1,177 @@
+{
+  "uuid": "dc1407e5-ccd6-45fd-9789-d3f87bf9ceaa",
+  "lastMigration": 28,
+  "name": "Shopping",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "70da7574-c230-4453-982f-c6d6ac1a33c6",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "shopping-list",
+      "responses": [
+        {
+          "uuid": "e733468e-94fe-471c-a2c7-8ab5c8793983",
+          "body": "{}",
+          "latency": 2000,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "v33q",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b22d2973-5adb-48b3-acae-c3721c630e62",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "login",
+      "responses": [
+        {
+          "uuid": "5a974f44-5770-49b7-9bc7-75da8750abf7",
+          "body": "{}",
+          "latency": 2000,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "ffb1f43f-0466-4e8f-9ee1-9341baa5b55a",
+          "body": "{\n  \"user\": \"Ramon Ribeiro\",\n  \"acesso\": [\"ADMIN\", \"USER\"]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "742eea97-dba8-4c6a-be81-6c343b1fabc4",
+          "body": "{\n  \"user\": \"User Teste\",\n  \"acesso\": [\"USER\"]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "321",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "70da7574-c230-4453-982f-c6d6ac1a33c6"
+    },
+    {
+      "type": "route",
+      "uuid": "b22d2973-5adb-48b3-acae-c3721c630e62"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "eeeec3d3-31ea-4295-b2ee-c0e49f27c7f2",
+      "id": "v33q",
+      "name": "shopping",
+      "documentation": "",
+      "value": "[\n  {{#repeat 3}}\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"nome\": \"{{faker 'commerce.productName'}}\",\n      \"quantidade\": {{faker 'datatype.number' min=0 max=3}}\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]"
+    }
+  ]
+}
